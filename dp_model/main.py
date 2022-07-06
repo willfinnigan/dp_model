@@ -1,5 +1,7 @@
 from dp_model.create_dp import create_dp_pop
 from dp_model.hydrolyze import Hydrolyzer
+import matplotlib.pyplot as plt
+
 
 def run_simulation(initial_dp_str, rounds, pop_num, i_tag_str='I-', hydrolysis_proba=1, weights=[0, 1, 1, 1, 1, 1, 1]):
     dp_pop = create_dp_pop(initial_dp_str, pop_num, i_tag_str=i_tag_str)
@@ -11,7 +13,12 @@ def run_simulation(initial_dp_str, rounds, pop_num, i_tag_str='I-', hydrolysis_p
         i_tagged_pop = dp_pop.get_i_tagged_pop()
         count_dict = i_tagged_pop.get_count_dict()
         print(f"Round {i + 1}: {count_dict}")
+        plot_count_dict(count_dict)
 
+
+def plot_count_dict(count_dict):
+    plt.bar(list(count_dict.keys()), list(count_dict.values()))
+    plt.show()
 
 if __name__ == '__main__':
     pop_num = 10000
